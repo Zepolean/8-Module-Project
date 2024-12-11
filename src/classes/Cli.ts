@@ -7,17 +7,16 @@ import Wheel from "./Wheel.js";
 import Vehicle from "./Vehicle.js";
 
 // define the Cli class
-class Cli extends Vehicle{
+class Cli{
   // TODO: update the vehicles property to accept Truck and Motorbike objects as well
   // TODO: You will need to use the Union operator to define additional types for the array
   // TODO: See the AbleToTow interface for an example of how to use the Union operator
-  vehicles: Vehicle[];
+  vehicles: (Car | Truck | Motorbike)[];
   selectedVehicleVin: string | undefined;
   exit: boolean = false;
 
   // TODO: Update the constructor to accept Truck and Motorbike objects as well
-  constructor(vehicles: Vehicle[]) {
-    super();
+  constructor(vehicles: (Car | Truck | Motorbike)[]) {
     this.vehicles = vehicles;
   }
 
@@ -75,7 +74,7 @@ class Cli extends Vehicle{
       });
   }
 
-  // method to create a car
+  // // method to create a car
   createCar(): void {
     inquirer
       .prompt([
@@ -176,6 +175,7 @@ class Cli extends Vehicle{
         // TODO: push the truck to the vehicles array
         // TODO: set the selectedVehicleVin to the vin of the truck
         // TODO: perform actions on the truck
+        
       });
   }
 
@@ -244,27 +244,27 @@ class Cli extends Vehicle{
 
   // method to find a vehicle to tow
   // TODO: add a parameter to accept a truck object
-  findVehicleToTow(): void {
-    inquirer
-      .prompt([
-        {
-          type: 'list',
-          name: 'vehicleToTow',
-          message: 'Select a vehicle to tow',
-          choices: this.vehicles.map((vehicle) => {
-            return {
-              name: `${vehicle.vin} -- ${vehicle.make} ${vehicle.model}`,
-              value: vehicle,
-            };
-          }),
-        },
-      ])
-      .then((answers) => {
-        // TODO: check if the selected vehicle is the truck
-        // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
-        // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
-      });
-  }
+  // findVehicleToTow(): void {
+  //   inquirer
+  //     .prompt([
+  //       {
+  //         type: 'list',
+  //         name: 'vehicleToTow',
+  //         message: 'Select a vehicle to tow',
+  //         choices: this.vehicles.map((vehicle) => {
+  //           return {
+  //             name: `${vehicle.vin} -- ${vehicle.make} ${vehicle.model}`,
+  //             value: vehicle,
+  //           };
+  //         }),
+  //       },
+  //     ])
+  //     .then((answers) => {
+  //       // TODO: check if the selected vehicle is the truck
+  //       // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
+  //       // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
+  //     });
+  // }
 
   // method to perform actions on a vehicle
   performActions(): void {
@@ -366,27 +366,27 @@ class Cli extends Vehicle{
   }
 
   // method to start the cli
-  startCli(): void {
-    inquirer
-      .prompt([
-        {
-          type: 'list',
-          name: 'CreateOrSelect',
-          message:
-            'Would you like to create a new vehicle or perform an action on an existing vehicle?',
-          choices: ['Create a new vehicle', 'Select an existing vehicle'],
-        },
-      ])
-      .then((answers) => {
-        // check if the user wants to create a new vehicle or select an existing vehicle
-        if (answers.CreateOrSelect === 'Create a new vehicle') {
-          this.createVehicle();
-        } else {
-          this.chooseVehicle();
-        }
-      });
-  }
-}
+//   startCli(): void {
+//     inquirer
+//       .prompt([
+//         {
+//           type: 'list',
+//           name: 'CreateOrSelect',
+//           message:
+//             'Would you like to create a new vehicle or perform an action on an existing vehicle?',
+//           choices: ['Create a new vehicle', 'Select an existing vehicle'],
+//         },
+//       ])
+//       .then((answers) => {
+//         // check if the user wants to create a new vehicle or select an existing vehicle
+//         if (answers.CreateOrSelect === 'Create a new vehicle') {
+//           this.createVehicle();
+//         } else {
+//           this.chooseVehicle();
+//         }
+//       });
+//   }
+// }
 
 // export the Cli class
 export default Cli;
